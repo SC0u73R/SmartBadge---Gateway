@@ -12,21 +12,16 @@ from rsa.randnum import read_random_bits
 #Mise à jour de la RTC
 def RTC():
     #Initialisation RTC et USB
-    #rtc = RTC()
-    #usb = USB_VCP()
     etape=0
     coucou = rtc.datetime()
     if(usb.isconnected()==True):
-            #time.sleep_ms(1000)
             if(etape==0):
-
-                #salut = usb.send(b"Salut")
                 blue_led.on()
                 cmd = usb.recv(2, timeout=5000)
                 if (cmd == b'un'):
                     green_led.on()
                     etape=1
-                    #usb.send(b"Miaou")
+                  
             if(etape==1):
                  usb.send(str(coucou))
                  etape=2
@@ -170,8 +165,7 @@ with open(fn, "a") as f:
 while(True):
      #ButtonCurrentValue = int(((adc.read()* 3.3) / 4095))
      red_led.on()
-     if(usb.isconnected()==True):
-            #blue_led.on()
+     if(usb.isconnected()==True):           
             RTC()
 
 #Quand le bouton est appuyé lancement du code
